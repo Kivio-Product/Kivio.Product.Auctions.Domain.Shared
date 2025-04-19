@@ -1,4 +1,4 @@
-package shareddomain
+package offer
 
 import (
 	"errors"
