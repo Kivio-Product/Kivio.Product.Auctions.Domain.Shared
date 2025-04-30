@@ -8,7 +8,7 @@ import (
 )
 
 type OfferFactory interface {
-	CreateOffer(name, description, posId, typer string, expireAt time.Time) (*Offer, error)
+	CreateOffer(name, description, posId, typer string, auctionTime int64) (*Offer, error)
 }
 
 type DefaultOfferFactory struct{}
@@ -17,7 +17,7 @@ func NewOfferFactory() OfferFactory {
 	return &DefaultOfferFactory{}
 }
 
-func (f *DefaultOfferFactory) CreateOffer(name, description, posId, typer string, expireAt time.Time) (*Offer, error) {
+func (f *DefaultOfferFactory) CreateOffer(name, description, posId, typer string, auctionTime int64) (*Offer, error) {
 
 	if name == "" {
 		return nil, fmt.Errorf("Name cannot be empty")
@@ -31,18 +31,15 @@ func (f *DefaultOfferFactory) CreateOffer(name, description, posId, typer string
 	if typer == "" {
 		return nil, fmt.Errorf("Type cannot be empty")
 	}
-	if expireAt.String() == "" {
-		return nil, fmt.Errorf("expireAt cannot be empty")
-	}
 
 	return &Offer{
 		OfferId:     generateUUID(),
 		Name:        name,
 		Description: description,
 		CreatedAt:   time.Now(),
-		ExpireAt:    expireAt,
 		PosId:       posId,
 		Type:        typer,
+		AuctionTime: auctionTime,
 	}, nil
 }
 
