@@ -21,15 +21,19 @@ var (
 	StateActive   = "Offered"
 )
 
-func (o *Offer) Update(name, description string) error {
+func (o *Offer) Update(name, description string, auctionTime int64) error {
 	if name == "" {
 		return errors.New("El nombre no puede estar vacío")
 	}
 	if description == "" {
 		return errors.New("La descripcion no puede estar vacía")
 	}
+	if auctionTime < 0 {
+		return errors.New("el auctionTime debe ser mayor a cero")
+	}
 	o.Name = name
 	o.Description = description
+	o.AuctionTime = auctionTime
 	return nil
 }
 
