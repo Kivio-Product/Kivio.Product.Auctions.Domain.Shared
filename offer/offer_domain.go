@@ -14,6 +14,7 @@ type Offer struct {
 	State       string
 	Type        string
 	AuctionTime int64
+	SortKey     string
 }
 
 var (
@@ -34,6 +35,7 @@ func (o *Offer) Update(name, description string, auctionTime int64) error {
 	o.Name = name
 	o.Description = description
 	o.AuctionTime = auctionTime
+	o.SortKey = "ACTIVE"
 	return nil
 }
 

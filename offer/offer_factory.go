@@ -40,6 +40,7 @@ func (f *DefaultOfferFactory) CreateOffer(name, description, posId, typer string
 		PosId:       posId,
 		Type:        typer,
 		AuctionTime: auctionTime,
+		SortKey:     "ACTIVE",
 	}, nil
 }
 
